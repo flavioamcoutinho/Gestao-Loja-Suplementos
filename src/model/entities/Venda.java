@@ -1,4 +1,4 @@
-package com.company;
+package model.entities;
 
 public class Venda {
 
