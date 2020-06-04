@@ -20,6 +20,8 @@ public class Main {
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
+        System.out.println(" === TEST 1 : seller findById === ");
+
         Produto produto = produtoDao.findById(1);
 
         System.out.println(produto);
