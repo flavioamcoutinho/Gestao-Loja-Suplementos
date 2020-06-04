@@ -20,7 +20,7 @@ public class Main {
 
         Produto produto = new Produto(1, "Proteina", 12.3, 10, "UM", "shsa", obj);
 
-        System.out.println(produto);
+        System.out.println(produto );
 
     }
 }
