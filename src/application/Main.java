@@ -18,13 +18,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Categoria obj = new Categoria(1, "Vestuario");
-
-        Produto produto = new Produto(1, "Proteina", 12.3, 10, "UM", "shsa", obj);
-
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
-        System.out.println(produto );
+        Produto produto = produtoDao.findById(1);
+
+        System.out.println(produto);
 
     }
 }
@@ -187,4 +185,3 @@ public class Main {
 //            DB.closeStatement(st);
 //            DB.closeConn();
 //        }
-
