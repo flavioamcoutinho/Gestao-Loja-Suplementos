@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import db.DB;
 import db.DBIntegrityException;
 import db.DbException;
 import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
+import model.dao.impl.ProdutoDaoJDBC;
 import model.entities.Categoria;
 import model.entities.Produto;
 
@@ -25,6 +27,16 @@ public class Main {
         Produto produto = produtoDao.findById(1);
 
         System.out.println(produto);
+
+        System.out.println("/n === TEST 2 : seller findBycategoria === ");
+
+        Categoria categoria = new Categoria(2, null);
+
+        List<Produto> list = produtoDao.findByCategoria(categoria);
+
+        for (Produto obj : list) {
+            System.out.println(obj);
+        }
 
     }
 }

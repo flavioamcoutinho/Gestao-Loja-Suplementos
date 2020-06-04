@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.DelayQueue;
 
 import db.DB;
@@ -96,5 +99,46 @@ public class ProdutoDaoJDBC
     @Override
     public List<Produto> findAll() {
         return null;
+    }
+
+    @Override
+    public List<Produto> findByCategoria(final Categoria pCategoria) {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = conn.prepareStatement(
+                    "select produto.*, categoria.descricaoCategoria from produto inner join categoria " +
+                    "on produto.idCategoria = categoria.idCategoria where categoria.idCategoria = ? " +
+                    "order by descricaoProduto");
+
+            statement.setInt(1, pCategoria.getIdCategoria());
+
+            resultSet = statement.executeQuery();
+
+            List<Produto> list = new ArrayList<>();
+            Map<Integer, Categoria> map = new HashMap<>();
+
+            while (resultSet.next()) {
+
+                Categoria categoria = map.get(resultSet.getInt("idCategoria"));
+
+                if (categoria == null) {
+                    categoria = instantiateCategoria(resultSet);
+                    map.put(resultSet.getInt("idCategoria"), categoria);
+                }
+
+                Produto produto = instantiateProduto(resultSet, categoria);
+
+                list.add(produto);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(statement);
+            DB.closeResultSet(resultSet);
+        }
+
     }
 }
