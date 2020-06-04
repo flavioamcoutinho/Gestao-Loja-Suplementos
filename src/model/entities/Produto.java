@@ -1,10 +1,13 @@
 package model.entities;
 
 import java.awt.Image;
+import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.text.html.ImageView;
 
-public class Produto {
+public class Produto
+        implements Serializable {
 
     private int    idProduto;
     private String descricaoProduto;
@@ -12,17 +15,22 @@ public class Produto {
     private int    quantidade;
     private String UM;
     private String observacoes;
-    private int    idCategoria;
+
+    private Categoria idCategoria;
+
+    public Produto() {
+
+    }
 
     public Produto(int pIdProduto, String pDescricaoProduto, double pPreco, int pQuantidade, String pUM,
-                   String pObservacoes, int pIdCategoria) {
-        idProduto = pIdProduto;
-        descricaoProduto = pDescricaoProduto;
-        preco = pPreco;
-        quantidade = pQuantidade;
-        UM = pUM;
-        observacoes = pObservacoes;
-        idCategoria = pIdCategoria;
+                   String pObservacoes, Categoria pIdCategoria) {
+        this.idProduto = pIdProduto;
+        this.descricaoProduto = pDescricaoProduto;
+        this.preco = pPreco;
+        this.quantidade = pQuantidade;
+        this.UM = pUM;
+        this.observacoes = pObservacoes;
+        this.idCategoria = pIdCategoria;
     }
 
     public int getIdProduto() {
@@ -49,7 +57,7 @@ public class Produto {
         return observacoes;
     }
 
-    public int getIdCategoria() {
+    public Categoria getIdCategoria() {
         return idCategoria;
     }
 
@@ -77,7 +85,32 @@ public class Produto {
         UM = pUM;
     }
 
-    public void setIdCategoria(final int pIdCategoria) {
+    public void setIdCategoria(Categoria pIdCategoria) {
         idCategoria = pIdCategoria;
     }
+
+    @Override
+    public boolean equals(final Object pO) {
+        if (this == pO) {
+            return true;
+        }
+        if (pO == null || getClass() != pO.getClass()) {
+            return false;
+        }
+        final Produto produto = (Produto) pO;
+        return idProduto == produto.idProduto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProduto);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" + "idProduto=" + idProduto + ", descricaoProduto='" + descricaoProduto + '\'' + ", preco=" +
+               preco + ", quantidade=" + quantidade + ", UM='" + UM + '\'' + ", observacoes='" + observacoes + '\'' +
+               ", idCategoria=" + idCategoria + '}';
+    }
+
 }

@@ -10,13 +10,18 @@ import db.DB;
 import db.DBIntegrityException;
 import db.DbException;
 import model.entities.Categoria;
+import model.entities.Produto;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Categoria obj = new Categoria(1, "Vestuario");
-        System.out.println(obj);
+
+        Produto produto = new Produto(1, "Proteina", 12.3, 10, "UM", "shsa", obj);
+
+        System.out.println(produto);
+
     }
 }
 
