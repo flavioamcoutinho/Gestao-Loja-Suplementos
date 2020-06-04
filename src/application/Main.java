@@ -9,6 +9,8 @@ import java.sql.Statement;
 import db.DB;
 import db.DBIntegrityException;
 import db.DbException;
+import model.dao.DaoFactory;
+import model.dao.ProdutoDao;
 import model.entities.Categoria;
 import model.entities.Produto;
 
@@ -19,6 +21,8 @@ public class Main {
         Categoria obj = new Categoria(1, "Vestuario");
 
         Produto produto = new Produto(1, "Proteina", 12.3, 10, "UM", "shsa", obj);
+
+        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
         System.out.println(produto );
 
