@@ -98,7 +98,39 @@ public class ProdutoDaoJDBC
 
     @Override
     public List<Produto> findAll() {
-        return null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = conn.prepareStatement(
+                    "select produto.*, categoria.descricaoCategoria from produto inner join categoria " +
+                    "on produto.idCategoria = categoria.idCategoria order by descricaoProduto");
+
+            resultSet = statement.executeQuery();
+
+            List<Produto> list = new ArrayList<>();
+            Map<Integer, Categoria> map = new HashMap<>();
+
+            while (resultSet.next()) {
+
+                Categoria categoria = map.get(resultSet.getInt("idCategoria"));
+
+                if (categoria == null) {
+                    categoria = instantiateCategoria(resultSet);
+                    map.put(resultSet.getInt("idCategoria"), categoria);
+                }
+
+                Produto produto = instantiateProduto(resultSet, categoria);
+
+                list.add(produto);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(statement);
+            DB.closeResultSet(resultSet);
+        }
     }
 
     @Override
@@ -139,6 +171,5 @@ public class ProdutoDaoJDBC
             DB.closeStatement(statement);
             DB.closeResultSet(resultSet);
         }
-
     }
 }
