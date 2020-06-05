@@ -9,12 +9,12 @@ import javax.swing.text.html.ImageView;
 public class Produto
         implements Serializable {
 
-    private int    idProduto;
-    private String descricaoProduto;
-    private double preco;
-    private int    quantidade;
-    private String UM;
-    private String observacoes;
+    private Integer idProduto;
+    private String  descricaoProduto;
+    private double  preco;
+    private int     quantidade;
+    private String  UM;
+    private String  observacoes;
 
     private Categoria idCategoria;
 
@@ -22,7 +22,7 @@ public class Produto
 
     }
 
-    public Produto(int pIdProduto, String pDescricaoProduto, double pPreco, int pQuantidade, String pUM,
+    public Produto(Integer pIdProduto, String pDescricaoProduto, double pPreco, int pQuantidade, String pUM,
                    String pObservacoes, Categoria pIdCategoria) {
         this.idProduto = pIdProduto;
         this.descricaoProduto = pDescricaoProduto;
@@ -33,7 +33,7 @@ public class Produto
         this.idCategoria = pIdCategoria;
     }
 
-    public int getIdProduto() {
+    public Integer getIdProduto() {
         return idProduto;
     }
 
@@ -61,7 +61,7 @@ public class Produto
         return idCategoria;
     }
 
-    public void setIdProduto(final int pIdProduto) {
+    public void setIdProduto(final Integer pIdProduto) {
         idProduto = pIdProduto;
     }
 

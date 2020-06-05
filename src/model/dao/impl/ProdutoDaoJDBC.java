@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,39 @@ public class ProdutoDaoJDBC
 
     @Override
     public void insert(final Produto pProduto) {
+        PreparedStatement st = null;
 
+        try {
+            st = conn.prepareStatement(
+                    "Insert into produto (descricaoProduto, preco, quantidade, UM, observacoes, idCategoria) values (?,?,?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+
+            st.setString(1, pProduto.getDescricaoProduto());
+            st.setDouble(2, pProduto.getPreco());
+            st.setInt(3, pProduto.getQuantidade());
+            st.setString(4, pProduto.getUM());
+            st.setString(5, pProduto.getObservacoes());
+            st.setInt(6, pProduto.getIdCategoria()
+                                 .getIdCategoria());
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    pProduto.setIdProduto(id);
+                }
+                DB.closeResultSet(rs);
+            } else {
+                throw new DbException("Unexpected error! No rows affected!");
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

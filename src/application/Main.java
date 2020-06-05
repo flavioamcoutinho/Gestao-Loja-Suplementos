@@ -22,13 +22,13 @@ public class Main {
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
-        System.out.println(" === TEST 1 : seller findById === ");
+        System.out.println(" === TEST 1 : Produto findById === ");
 
         Produto produto = produtoDao.findById(1);
 
         System.out.println(produto);
 
-        System.out.println("/n === TEST 2 : seller findBycategoria === ");
+        System.out.println("/n === TEST 2 : Produto findBycategoria === ");
 
         Categoria categoria = new Categoria(2, null);
 
@@ -38,13 +38,19 @@ public class Main {
             System.out.println(obj);
         }
 
-        System.out.println("/n === TEST 3 : seller findAll === ");
+        System.out.println("/n === TEST 3 : Produto findAll === ");
 
         list = produtoDao.findAll();
 
         for (Produto obj : list) {
             System.out.println(obj);
         }
+
+        System.out.println("/n === TEST 4 : Produto insert === ");
+
+        Produto newProduto = new Produto(null,"Aveia",10.99,30,"UNI","",categoria);
+        produtoDao.insert(newProduto);
+        System.out.println("Inserted! New id = " + newProduto.getIdProduto());
 
     }
 }

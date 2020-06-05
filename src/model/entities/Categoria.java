@@ -3,16 +3,17 @@ package model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Categoria implements Serializable {
+public class Categoria
+        implements Serializable {
 
-    private int    idCategoria;
-    private String descricaoCategoria;
+    private Integer idCategoria;
+    private String  descricaoCategoria;
 
     public Categoria() {
 
     }
 
-    public Categoria(int pIdCategoria, String pDescricaoCategoria) {
+    public Categoria(Integer pIdCategoria, String pDescricaoCategoria) {
         this.idCategoria = pIdCategoria;
         this.descricaoCategoria = pDescricaoCategoria;
     }
@@ -25,7 +26,7 @@ public class Categoria implements Serializable {
         return descricaoCategoria;
     }
 
-    public void setIdCategoria(final int pIdCategoria) {
+    public void setIdCategoria(final Integer pIdCategoria) {
         this.idCategoria = pIdCategoria;
     }
 
