@@ -92,6 +92,22 @@ public class ProdutoDaoJDBC
     @Override
     public void deleteById(final int idProduto) {
 
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement("Delete from produto where idProduto = ?");
+
+            st.setInt(1, idProduto);
+
+            st.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
+
     }
 
     @Override

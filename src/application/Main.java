@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Scanner;
 
 import db.DB;
 import db.DBIntegrityException;
@@ -19,6 +20,8 @@ import model.entities.Produto;
 public class Main {
 
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
 
         ProdutoDao produtoDao = DaoFactory.createProdutoDao();
 
@@ -58,6 +61,15 @@ public class Main {
         produto.setDescricaoProduto("Protein");
         produtoDao.update(produto);
         System.out.println("Update Completed!");
+
+        System.out.println("/n === TEST 6 : Produto delete === ");
+
+        System.out.println("Enter id for delete test: ");
+        int id = scanner.nextInt();
+        produtoDao.deleteById(id);
+        System.out.println("Delete completed!");
+
+        scanner.close();
 
     }
 }
