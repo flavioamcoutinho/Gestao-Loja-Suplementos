@@ -52,6 +52,13 @@ public class Main {
         produtoDao.insert(newProduto);
         System.out.println("Inserted! New id = " + newProduto.getIdProduto());
 
+        System.out.println("/n === TEST 5 : Produto update === ");
+
+        produto = produtoDao.findById(1);
+        produto.setDescricaoProduto("Protein");
+        produtoDao.update(produto);
+        System.out.println("Update Completed!");
+
     }
 }
 

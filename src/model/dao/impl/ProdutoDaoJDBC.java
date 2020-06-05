@@ -65,7 +65,28 @@ public class ProdutoDaoJDBC
 
     @Override
     public void update(final Produto pProduto) {
+        PreparedStatement st = null;
 
+        try {
+            st = conn.prepareStatement(
+                    "update produto set descricaoProduto = ?, preco = ?, quantidade = ?, UM = ?, observacoes = ?, idCategoria = ? where idProduto = ?");
+
+            st.setString(1, pProduto.getDescricaoProduto());
+            st.setDouble(2, pProduto.getPreco());
+            st.setInt(3, pProduto.getQuantidade());
+            st.setString(4, pProduto.getUM());
+            st.setString(5, pProduto.getObservacoes());
+            st.setInt(6, pProduto.getIdCategoria()
+                                 .getIdCategoria());
+            st.setInt(7, pProduto.getIdProduto());
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
