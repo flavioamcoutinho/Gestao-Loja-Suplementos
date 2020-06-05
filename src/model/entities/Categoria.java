@@ -18,7 +18,7 @@ public class Categoria
         this.descricaoCategoria = pDescricaoCategoria;
     }
 
-    public int getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import db.DB;
 import db.DBIntegrityException;
 import db.DbException;
+import model.dao.CategoriaDao;
 import model.dao.DaoFactory;
 import model.dao.ProdutoDao;
 import model.dao.impl.ProdutoDaoJDBC;
@@ -21,55 +22,89 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
+//
+//        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+//
+//        System.out.println(" === TEST 1 : Produto findById === ");
+//
+//        Produto produto = produtoDao.findById(1);
+//
+//        System.out.println(produto);
+//
+//        System.out.println("/n === TEST 2 : Produto findBycategoria === ");
+//
+//        Categoria categoria = new Categoria(2, null);
+//
+//        List<Produto> list = produtoDao.findByCategoria(categoria);
+//
+//        for (Produto obj : list) {
+//            System.out.println(obj);
+//        }
+//
+//        System.out.println("/n === TEST 3 : Produto findAll === ");
+//
+//        list = produtoDao.findAll();
+//
+//        for (Produto obj : list) {
+//            System.out.println(obj);
+//        }
+//
+//        System.out.println("/n === TEST 4 : Produto insert === ");
+//
+//        Produto newProduto = new Produto(null,"Aveia",10.99,30,"UNI","",categoria);
+//        produtoDao.insert(newProduto);
+//        System.out.println("Inserted! New id = " + newProduto.getIdProduto());
+//
+//        System.out.println("/n === TEST 5 : Produto update === ");
+//
+//        produto = produtoDao.findById(1);
+//        produto.setDescricaoProduto("Protein");
+//        produtoDao.update(produto);
+//        System.out.println("Update Completed!");
+//
+//        System.out.println("/n === TEST 6 : Produto delete === ");
+//
+//        System.out.println("Enter id for delete test: ");
+//        int id = scanner.nextInt();
+//        produtoDao.deleteById(id);
+//        System.out.println("Delete completed!");
+//
+//        scanner.close();
 
-        ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println(" === TEST 1 : Produto findById === ");
+        CategoriaDao departmentDao = DaoFactory.createCategoriaDao();
 
-        Produto produto = produtoDao.findById(1);
+        System.out.println("=== TEST 1: findById =======");
+        Categoria dep = departmentDao.findById(1);
+        System.out.println(dep);
 
-        System.out.println(produto);
-
-        System.out.println("/n === TEST 2 : Produto findBycategoria === ");
-
-        Categoria categoria = new Categoria(2, null);
-
-        List<Produto> list = produtoDao.findByCategoria(categoria);
-
-        for (Produto obj : list) {
-            System.out.println(obj);
+        System.out.println("\n=== TEST 2: findAll =======");
+        List<Categoria> list = departmentDao.findAll();
+        for (Categoria d : list) {
+            System.out.println(d);
         }
 
-        System.out.println("/n === TEST 3 : Produto findAll === ");
+        System.out.println("\n=== TEST 3: insert =======");
+        Categoria newDepartment = new Categoria(null, "Music");
+        departmentDao.insert(newDepartment);
+        System.out.println("Inserted! New id: " + newDepartment.getIdCategoria());
 
-        list = produtoDao.findAll();
+        System.out.println("\n=== TEST 4: update =======");
+        Categoria dep2 = departmentDao.findById(1);
+        dep2.setDescricaoCategoria("Food");
+        departmentDao.update(dep2);
+        System.out.println("Update completed");
 
-        for (Produto obj : list) {
-            System.out.println(obj);
-        }
+        System.out.println("\n=== TEST 5: delete =======");
+        System.out.print("Enter id for delete test: ");
+        int id = sc.nextInt();
+        departmentDao.deleteById(id);
+        System.out.println("Delete completed");
 
-        System.out.println("/n === TEST 4 : Produto insert === ");
+        sc.close();
 
-        Produto newProduto = new Produto(null,"Aveia",10.99,30,"UNI","",categoria);
-        produtoDao.insert(newProduto);
-        System.out.println("Inserted! New id = " + newProduto.getIdProduto());
-
-        System.out.println("/n === TEST 5 : Produto update === ");
-
-        produto = produtoDao.findById(1);
-        produto.setDescricaoProduto("Protein");
-        produtoDao.update(produto);
-        System.out.println("Update Completed!");
-
-        System.out.println("/n === TEST 6 : Produto delete === ");
-
-        System.out.println("Enter id for delete test: ");
-        int id = scanner.nextInt();
-        produtoDao.deleteById(id);
-        System.out.println("Delete completed!");
-
-        scanner.close();
 
     }
 }
